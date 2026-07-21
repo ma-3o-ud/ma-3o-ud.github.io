@@ -13,7 +13,7 @@
 const CONFIG = {
   name: "ma_3o_ud",
   badge: true,
-  bio: "Content Creator",
+  tags: ["Football Lover", "Content Creator", "Lifestyle"],
   headerColor: "#f3c7cc",
   avatar: "https://i.ibb.co/mKp9DFS/d72952765e7240b18cd8c8db84e2e5ed-0.png",
   pillOne: { label: "See more of me", url: "https://www.instagram.com/ma_3o_ud?igsh=MTB5bHN6dmMzdWlsdw==", icon: "lock", color: "#e8909e" },
@@ -26,7 +26,12 @@ const CONFIG = {
     { label: "YouTube", url: "https://www.youtube.com/@masoud-j1b7w", icon: "youtube" },
     { label: "WhatsApp", url: "https://wa.me/989147287090", icon: "whatsapp" },
     { label: "Facebook", url: "https://www.facebook.com/share/18URZ41sGb/", icon: "facebook" },
-  ]
+  ],
+  gallery: [
+    "https://i.ibb.co/MyXwsHDQ/file-00000000e3bc71f49f3bfb61ce9c6cda.png",
+    "https://i.ibb.co/6R4w0B9t/IMG-20240603-192221-738.jpg"
+  ],
+  about: "Welcome to my official page! This is where you'll find all my links in one place — my social media, my community, and a glimpse into my daily life. Thank you for being here."
 };
 </script>
 
@@ -38,10 +43,11 @@ const CONFIG = {
   .avatar-wrap{ position:absolute; left:50%; top:170px; transform:translate(-50%,-50%); }
   .avatar{ width:150px; height:150px; border-radius:50%; border:5px solid #fff; object-fit:cover; display:block; box-shadow:0 2px 10px rgba(0,0,0,0.12); }
   .content{ padding:92px 22px 40px; text-align:center; }
-  .name-row{ display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:10px; }
+  .name-row{ display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:16px; }
   .name{ font-size:26px; font-weight:800; color:#111; }
   .badge{ width:22px; height:22px; color:#1d9bf0; flex-shrink:0; }
-  .bio{ font-size:14px; color:#8a8a8f; font-weight:500; letter-spacing:.02em; margin-bottom:24px; }
+  .tags{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:24px; }
+  .tag{ background:#fff; border:1px solid #e2e2e5; color:#555; font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:20px; }
   .pill{ display:flex; align-items:center; gap:12px; width:100%; padding:14px 18px; border-radius:30px; border:1.5px solid var(--c); background:#fff; text-decoration:none; color:#222; font-weight:700; font-size:15px; margin-bottom:14px; transition:transform .15s ease, box-shadow .15s ease; }
   .pill:hover{ transform:translateY(-1px); box-shadow:0 6px 16px -8px rgba(0,0,0,0.25); }
   .pill .icon-circle{ width:34px; height:34px; border-radius:50%; background:var(--c); display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; }
@@ -62,6 +68,15 @@ const CONFIG = {
   .icon-wrap.youtube{ background:#FF0000; }
   .icon-wrap.facebook{ background:#1877F2; }
   .icon-wrap.web{ background:#d98c2b; }
+
+  .section-label{ text-align:left; font-size:12px; font-weight:700; letter-spacing:.12em; color:#b5b5ba; text-transform:uppercase; margin:30px 0 12px; }
+  .gallery{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .gallery img{ width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:14px; display:block; }
+
+  .about-box{ margin-top:30px; background:#fff; border:1px solid #e2e2e5; border-radius:16px; padding:22px; text-align:center; }
+  .about-title{ font-size:12px; font-weight:700; letter-spacing:.15em; color:#e8909e; margin-bottom:10px; }
+  .about-text{ font-size:13.5px; color:#666; line-height:1.7; }
+
   .footer-note{ text-align:center; font-size:11.5px; color:#b5b5ba; margin-top:30px; }
 </style>
 
@@ -102,6 +117,10 @@ function render(){
     </a>
   `).join('');
 
+  const tagsHtml = (CONFIG.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+
+  const galleryHtml = (CONFIG.gallery || []).map(src => `<img src="${src}" alt="gallery">`).join('');
+
   app.innerHTML = `
     <div class="header"></div>
     <div class="avatar-wrap">
@@ -112,10 +131,12 @@ function render(){
         <span class="name">${CONFIG.name}</span>
         ${CONFIG.badge ? `<svg class="badge" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14.5 4.5 18 4l.5 3.5L22 9l-2 3 2 3-3.5 1.5L18 20l-3.5-.5L12 22l-2.5-2.5L6 20l-.5-3.5L2 15l2-3-2-3 3.5-1.5L6 4l3.5.5L12 2Z"/><path d="m9 12 2 2 4-4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}
       </div>
-      <div class="bio">${CONFIG.bio}</div>
+      ${tagsHtml ? `<div class="tags">${tagsHtml}</div>` : ''}
       ${pillHtml(CONFIG.pillOne)}
       ${pillHtml(CONFIG.pillTwo)}
       <div class="grid">${gridHtml}</div>
+      ${galleryHtml ? `<div class="section-label">Gallery</div><div class="gallery">${galleryHtml}</div>` : ''}
+      ${CONFIG.about ? `<div class="about-box"><div class="about-title">ABOUT</div><div class="about-text">${CONFIG.about}</div></div>` : ''}
       <div class="footer-note">Made with love</div>
     </div>
   `;
