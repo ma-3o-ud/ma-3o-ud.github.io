@@ -18,13 +18,13 @@ const CONFIG = {
   avatar: "https://i.ibb.co/mKp9DFS/d72952765e7240b18cd8c8db84e2e5ed-0.png",
   pillOne: { label: "See more of me", url: "https://www.instagram.com/ma_3o_ud?igsh=MTB5bHN6dmMzdWlsdw==", icon: "lock", color: "#e8909e" },
   pillTwo: { label: "My Telegram Channel", url: "https://t.me/KoCheBi_Khiali", icon: "telegram", color: "#3aa8e0" },
-  grid: [
-    { label: "Telegram", url: "https://t.me/ma_30_ud", icon: "telegram" },
-    { label: "Threads", url: "https://www.threads.net/@ma_3o_ud", icon: "threads" },
+  links: [
     { label: "Instagram", url: "https://www.instagram.com/ma_3o_ud?igsh=MTB5bHN6dmMzdWlsdw==", icon: "instagram" },
+    { label: "Telegram", url: "https://t.me/ma_30_ud", icon: "telegram" },
+    { label: "WhatsApp", url: "https://wa.me/989147287090", icon: "whatsapp" },
+    { label: "Threads", url: "https://www.threads.net/@ma_3o_ud", icon: "threads" },
     { label: "X", url: "https://x.com/ma_3o_ud", icon: "x" },
     { label: "YouTube", url: "https://www.youtube.com/@masoud-j1b7w", icon: "youtube" },
-    { label: "WhatsApp", url: "https://wa.me/989147287090", icon: "whatsapp" },
     { label: "Facebook", url: "https://www.facebook.com/share/18URZ41sGb/", icon: "facebook" },
   ],
   gallery: [
@@ -39,35 +39,50 @@ const CONFIG = {
   *{box-sizing:border-box; margin:0; padding:0;}
   body{ font-family:'Poppins', sans-serif; background:#f4f4f5; display:flex; justify-content:center; min-height:100vh; }
   .page{ width:100%; max-width:430px; background:#f4f4f5; min-height:100vh; }
-  .header{ background: var(--header-color, #f3c7cc); height:170px; position:relative; }
-  .avatar-wrap{ position:absolute; left:50%; top:170px; transform:translate(-50%,-50%); }
-  .avatar{ width:150px; height:150px; border-radius:50%; border:5px solid #fff; object-fit:cover; display:block; box-shadow:0 2px 10px rgba(0,0,0,0.12); }
-  .content{ padding:92px 22px 40px; text-align:center; }
+  .header{ height:20px; }
+  .avatar-wrap{ display:flex; justify-content:center; padding-top:20px; }
+  .avatar{ width:130px; height:130px; border-radius:50%; border:5px solid #fff; object-fit:cover; display:block; box-shadow:0 0 0 6px var(--header-color, #f3c7cc), 0 10px 24px rgba(0,0,0,0.12); }
+  .content{ padding:14px 22px 40px; text-align:center; }
   .name-row{ display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:16px; }
   .name{ font-size:26px; font-weight:800; color:#111; }
   .badge{ width:22px; height:22px; color:#1d9bf0; flex-shrink:0; }
   .tags{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:24px; }
   .tag{ background:#fff; border:1px solid #e2e2e5; color:#555; font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:20px; }
-  .pill{ display:flex; align-items:center; gap:12px; width:100%; padding:14px 18px; border-radius:30px; border:1.5px solid var(--c); background:#fff; text-decoration:none; color:#222; font-weight:700; font-size:15px; margin-bottom:14px; transition:transform .15s ease, box-shadow .15s ease; }
-  .pill:hover{ transform:translateY(-1px); box-shadow:0 6px 16px -8px rgba(0,0,0,0.25); }
-  .pill .icon-circle{ width:34px; height:34px; border-radius:50%; background:var(--c); display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; }
-  .pill .icon-circle svg{ width:17px; height:17px; }
-  .pill span.label{ flex:1; text-align:left; }
-  .pill .chevron{ color:#c9c9cd; flex-shrink:0; }
-  .pill .chevron svg{ width:18px; height:18px; }
-  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px; }
-  .grid-btn{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:26px 10px; border-radius:16px; border:1.5px solid #e2e2e5; background:#fff; text-decoration:none; color:#222; font-weight:600; font-size:14.5px; transition:transform .15s ease, box-shadow .15s ease; }
-  .grid-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 20px -10px rgba(0,0,0,0.2); }
-  .grid-btn .icon-wrap{ width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; }
-  .grid-btn svg{ width:22px; height:22px; }
-  .icon-wrap.telegram{ background:#27A7E7; }
-  .icon-wrap.whatsapp{ background:#25D366; }
-  .icon-wrap.instagram{ background:radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); }
-  .icon-wrap.x{ background:#000; }
-  .icon-wrap.threads{ background:#000; }
-  .icon-wrap.youtube{ background:#FF0000; }
-  .icon-wrap.facebook{ background:#1877F2; }
-  .icon-wrap.web{ background:#d98c2b; }
+
+  .pills-row{ display:flex; gap:10px; margin-bottom:12px; }
+  .pills-row .row-link{ margin-bottom:0; padding:14px 10px; font-size:13px; gap:8px; justify-content:center; }
+  .pills-row .row-link .label{ flex:none; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .pills-row .row-link .chevron{ display:none; }
+  .pills-row .row-link .icon-circle{ width:28px; height:28px; }
+  .pills-row .row-link .icon-circle svg{ width:14px; height:14px; }
+
+  .row-link{ display:flex; align-items:center; gap:14px; width:100%; padding:14px 18px; border-radius:30px; border:1.5px solid var(--c); background:#fff; text-decoration:none; color:#222; font-weight:700; font-size:15px; margin-bottom:12px; transition:transform .15s ease, box-shadow .15s ease; }
+  .row-link:hover{ transform:translateY(-1px); box-shadow:0 6px 16px -8px rgba(0,0,0,0.25); }
+  .row-link .icon-circle{ width:34px; height:34px; border-radius:50%; background:var(--c); display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; }
+  .row-link .icon-circle svg{ width:17px; height:17px; }
+  .row-link .label{ flex:1; text-align:left; }
+  .row-link .chevron{ color:#c9c9cd; flex-shrink:0; }
+  .row-link .chevron svg{ width:18px; height:18px; }
+
+  .icon-color.telegram{ background:#27A7E7; }
+  .icon-color.whatsapp{ background:#25D366; }
+  .icon-color.instagram{ background:radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); }
+  .icon-color.x{ background:#000; }
+  .icon-color.threads{ background:#000; }
+  .icon-color.youtube{ background:#FF0000; }
+  .icon-color.facebook{ background:#1877F2; }
+  .icon-color.web{ background:#d98c2b; }
+
+  .border-color.telegram{ border-color:#27A7E7; }
+  .border-color.whatsapp{ border-color:#25D366; }
+  .border-color.instagram{ border-color:#d6249f; }
+  .border-color.x{ border-color:#000; }
+  .border-color.threads{ border-color:#000; }
+  .border-color.youtube{ border-color:#FF0000; }
+  .border-color.facebook{ border-color:#1877F2; }
+  .border-color.web{ border-color:#d98c2b; }
+
+  .links-list{ margin-top:6px; }
 
   .section-label{ text-align:left; font-size:12px; font-weight:700; letter-spacing:.12em; color:#b5b5ba; text-transform:uppercase; margin:30px 0 12px; }
   .gallery{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
@@ -99,9 +114,18 @@ const ICONS = {
 function pillHtml(p){
   if(!p) return '';
   return `
-  <a class="pill" style="--c:${p.color}" href="${p.url}" target="_blank" rel="noopener">
+  <a class="row-link" style="--c:${p.color}" href="${p.url}" target="_blank" rel="noopener">
     <span class="icon-circle">${ICONS[p.icon] || ''}</span>
     <span class="label">${p.label}</span>
+    <span class="chevron">${ICONS.chevron}</span>
+  </a>`;
+}
+
+function linkRowHtml(item){
+  return `
+  <a class="row-link border-color ${item.icon}" href="${item.url}" target="_blank" rel="noopener">
+    <span class="icon-circle icon-color ${item.icon}">${ICONS[item.icon] || ICONS.web}</span>
+    <span class="label">${item.label}</span>
     <span class="chevron">${ICONS.chevron}</span>
   </a>`;
 }
@@ -110,15 +134,8 @@ function render(){
   document.documentElement.style.setProperty('--header-color', CONFIG.headerColor);
   const app = document.getElementById('app');
 
-  const gridHtml = CONFIG.grid.map(g => `
-    <a class="grid-btn" href="${g.url}" target="_blank" rel="noopener">
-      <span class="icon-wrap ${g.icon}">${ICONS[g.icon] || ICONS.web}</span>
-      <span>${g.label}</span>
-    </a>
-  `).join('');
-
+  const linksHtml = CONFIG.links.map(linkRowHtml).join('');
   const tagsHtml = (CONFIG.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
-
   const galleryHtml = (CONFIG.gallery || []).map(src => `<img src="${src}" alt="gallery">`).join('');
 
   app.innerHTML = `
@@ -132,9 +149,8 @@ function render(){
         ${CONFIG.badge ? `<svg class="badge" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14.5 4.5 18 4l.5 3.5L22 9l-2 3 2 3-3.5 1.5L18 20l-3.5-.5L12 22l-2.5-2.5L6 20l-.5-3.5L2 15l2-3-2-3 3.5-1.5L6 4l3.5.5L12 2Z"/><path d="m9 12 2 2 4-4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}
       </div>
       ${tagsHtml ? `<div class="tags">${tagsHtml}</div>` : ''}
-      ${pillHtml(CONFIG.pillOne)}
-      ${pillHtml(CONFIG.pillTwo)}
-      <div class="grid">${gridHtml}</div>
+      <div class="pills-row">${pillHtml(CONFIG.pillOne)}${pillHtml(CONFIG.pillTwo)}</div>
+      <div class="links-list">${linksHtml}</div>
       ${galleryHtml ? `<div class="section-label">Gallery</div><div class="gallery">${galleryHtml}</div>` : ''}
       ${CONFIG.about ? `<div class="about-box"><div class="about-title">ABOUT</div><div class="about-text">${CONFIG.about}</div></div>` : ''}
       <div class="footer-note">Made with love</div>
